@@ -27,6 +27,18 @@ if ($FileHash.Hash -eq "733033E2DDF86D94FCA30B2AA1249302")
     $patched = 1
 }
 
+if ($FileHash.Hash -eq "DB072470EFD8B498353E2A8ADB2A2DEB")
+{
+    $bytes = [System.IO.File]::ReadAllBytes("eboot.bin")
+    Write-Output "Patching 60fps Diva X US"
+    $bytes[0x431DA] = 0x1
+    #0x421da
+    $bytes[0x43CCA] = 0xf7
+    #0x42cca
+    [System.IO.File]::WriteAllBytes("output/eboot.bin", $bytes)
+    $patched = 1
+}
+
 # Diva X 60fps patch reference the patch above
 if ($FileHash.Hash -eq "04A530196C722D1A475082C57D85CFD7")
 {
